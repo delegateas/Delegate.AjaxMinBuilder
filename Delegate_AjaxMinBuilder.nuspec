@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Delegate_AjaxMinBuilder</id>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <title>Delegate AjaxMin Builder</title>
     <summary>Add auto build for ajaxmin xml files to bundle and minify JS and CSS files</summary>
     <authors>Søren Laurits Nielsen (sln@delegate.dk)</authors>
@@ -10,10 +10,10 @@
     <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
     <projectUrl>https://github.com/delegateas/Delegate_AjaxMinBuilder</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/delegateas/Delegate_AjaxMinBuilder/master/DelegateLogo_g.png</iconUrl>
-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Configures a project to automatically minify and/or bundle CSS and JS files during build. No extra dependencies are added to your project. Setup ajaxmin xml config files as required.</description>
     <releaseNotes>Notice: Includes a compiled version of Microsoft AjaxMin tool.</releaseNotes>
     <copyright>Copyright Delegate A/S 2015</copyright>
-    <tags>AjaxMin Build Delegate MSBuild VisualStudio</tags>
+    <tags>AjaxMin Build Delegate MSBuild VisualStudio optimize build minify minimize styles css js javascript stylesheet</tags>
   </metadata>
 </package>
