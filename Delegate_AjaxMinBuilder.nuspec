@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Delegate_AjaxMinBuilder</id>
-    <version>1.0.3</version>
+    <id>Delegate.AjaxMinBuilder</id>
+    <version>1.1.0</version>
     <title>Delegate AjaxMin Builder</title>
-    <summary>Add auto build for ajaxmin xml files to bundle and minify JS and CSS files</summary>
+    <summary>Add auto build for ajaxmin xml files to bundle and minify JS and CSS files.</summary>
     <authors>Søren Laurits Nielsen (sln@delegate.dk)</authors>
     <owners>Søren Laurits Nielsen (sln@delegate.dk)</owners>
     <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
