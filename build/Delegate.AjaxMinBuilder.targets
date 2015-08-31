@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Note: Config and XML filenames should not contain a . character.  AppSettings.config = ok, Configuration.AppSettings.Config = bad -->
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Included from ajaxmin -->
+  <PropertyGroup>
+    <AjaxMinPath>$(MSBuildThisFileDirectory)..\tool\AjaxMin.5.14.5506.26202</AjaxMinPath>
+  </PropertyGroup>
+
+  <UsingTask AssemblyFile="$(AjaxMinPath)\AjaxMinTask.dll" TaskName="AjaxMin" /> 
+  <UsingTask AssemblyFile="$(AjaxMinPath)\AjaxMinTask.dll" TaskName="AjaxMinBundleTask" />
+  <UsingTask AssemblyFile="$(AjaxMinPath)\AjaxMinTask.dll" TaskName="AjaxMinManifestTask" />
+  <UsingTask AssemblyFile="$(AjaxMinPath)\AjaxMinTask.dll" TaskName="AjaxMinManifestCleanTask" />
+
+  <!-- For old school inclusion, i.e. build servers -->
+  <PropertyGroup>
+      <CompileDependsOn>
+          $(CompileDependsOn);
+          Delegate_AjaxMinCompile;
+      </CompileDependsOn>
+      <CleanDependsOn>
+          Delegate_AjaxMinClean;
+          $(CleanDependsOn);
+      </CleanDependsOn>
+  </PropertyGroup>
+  
+  <!-- files in path -->
+  <ItemGroup>
+    <AjaxMinFiles Include="$(MSBuildProjectDirectory)\**\*.ajaxmin">
+      <InProject>false</InProject>
+    </AjaxMinFiles>
+    <AjaxMinFiles Include="$(MSBuildProjectDirectory)\**\*.ajaxmin.xml">
+      <InProject>false</InProject>
+    </AjaxMinFiles>
+    <!-- include .css and js as the bundles may be dependent on them -->
+    <AjaxMinFiles Include="$(MSBuildProjectDirectory)\**\*.css">
+      <InProject>false</InProject>
+    </AjaxMinFiles>
+    <AjaxMinFiles Include="$(MSBuildProjectDirectory)\**\*.js">
+      <InProject>false</InProject>
+    </AjaxMinFiles>
+  </ItemGroup>
+ 
+  <Target Name="Delegate_AjaxMinCompile" Inputs="@(AjaxMinFiles)" Outputs="@(AjaxMinFiles->'%(FullPath).trigger')" AfterTargets="Compile" >
+    <ItemGroup>
+      <AjaxMinFilesInProject Include="@(None);@(Content)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('%(FullPath)', '.+\.ajaxmin(\.xml)?$'))" />
+    </ItemGroup>
+
+    <Message Text="Delegate_AjaxMinCompile: Compiling %(AjaxMinFilesInProject.Identity)" Importance="high" />
+
+    <AjaxMinManifestTask 
+                     Configuration="$(Configuration)"
+                     TreatWarningsAsErrors="false"
+                     Manifests="@(AjaxMinFilesInProject)" />
+  </Target>
+
+  <Target Name="Delegate_AjaxMinClean" BeforeTargets="Clean">
+    <ItemGroup>
+      <AjaxMinFilesInProject Include="@(None);@(Content)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('%(FullPath)', '.+\.ajaxmin(\.xml)?$'))" />
+    </ItemGroup>
+
+    <Message Text="Delegate_AjaxMinCompile: Cleaning %(AjaxMinFilesInProject.Identity)" Importance="high" />
+
+    <AjaxMinManifestCleanTask Manifests="@(AjaxMinFilesInProject)" />
+  </Target>
+
+</Project>
