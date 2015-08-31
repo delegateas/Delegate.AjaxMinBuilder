@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Delegate.AjaxMinBuilder</id>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <title>Delegate AjaxMin Builder</title>
     <summary>Add auto build for ajaxmin xml files to bundle and minify JS and CSS files.</summary>
     <authors>Søren Laurits Nielsen (sln@delegate.dk)</authors>
